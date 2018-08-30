@@ -5473,6 +5473,11 @@ public final class Settings {
         /**
          * @hide
          */
+        public static final String OMNIJAWS_WEATHER_ICON_PACK = "omnijaws_weather_icon_pack";
+
+        /**
+         * @hide
+         */
         public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
 
         /**
@@ -6741,6 +6746,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCK_HIDE_STATUS_BAR);
             PRIVATE_SETTINGS.add(BATTERY_LEVEL_COLORS);
             PRIVATE_SETTINGS.add(VOLTE_VOWIFI_OVERRIDE);
+            PRIVATE_SETTINGS.add(OMNIJAWS_WEATHER_ICON_PACK);
         }
 
         /**

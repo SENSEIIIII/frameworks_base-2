@@ -70,6 +70,7 @@ import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.VpnTile;
+import com.android.systemui.qs.tiles.WeatherTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
 import com.android.systemui.qs.tiles.DataSwitchTile;
@@ -140,6 +141,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<RefreshRateTile> mRefreshRateTileProvider;
     private final Provider<QRCodeTile> mQRCodeTileProvider;
     private final Provider<MonoToggleTile> mMonoToggleTileProvider;
+    private final Provider<WeatherTile> mWeatherTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
     private final Provider<CustomTile.Builder> mCustomTileBuilderProvider;
@@ -199,7 +201,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<PowerShareTile> powerShareTileProvider,
             Provider<RefreshRateTile> refreshRateTileProvider,
             Provider<QRCodeTile> qrCodeTileProvider,
-            Provider<MonoToggleTile> monoToggleTileProvider) {
+            Provider<MonoToggleTile> monoToggleTileProvider,
+            Provider<WeatherTile> weatherTileProvider) {
         mQsHostLazy = qsHostLazy;
         mCustomTileBuilderProvider = customTileBuilderProvider;
 
@@ -255,6 +258,7 @@ public class QSFactoryImpl implements QSFactory {
         mRefreshRateTileProvider = refreshRateTileProvider;
         mQRCodeTileProvider = qrCodeTileProvider;
         mMonoToggleTileProvider = monoToggleTileProvider;
+        mWeatherTileProvider = weatherTileProvider;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -371,6 +375,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mQRCodeTileProvider.get();
             case "mono":
                 return mMonoToggleTileProvider.get();
+            case "weather":
+                return mWeatherTileProvider.get();
         }
         // Custom tiles
         if (tileSpec.startsWith(CustomTile.PREFIX)) {
