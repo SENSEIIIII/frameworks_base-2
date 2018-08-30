@@ -5478,6 +5478,11 @@ public final class Settings {
         /**
          * @hide
          */
+        public static final String OMNI_LOCKSCREEN_WEATHER_ENABLED = "lockscreen_weather_enabled";
+
+        /**
+         * @hide
+         */
         public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
 
         /**
@@ -6747,6 +6752,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BATTERY_LEVEL_COLORS);
             PRIVATE_SETTINGS.add(VOLTE_VOWIFI_OVERRIDE);
             PRIVATE_SETTINGS.add(OMNIJAWS_WEATHER_ICON_PACK);
+            PRIVATE_SETTINGS.add(OMNI_LOCKSCREEN_WEATHER_ENABLED);
         }
 
         /**

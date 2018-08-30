@@ -153,5 +153,6 @@ public class SystemSettings {
         Settings.System.BATTERY_LEVEL_COLORS,
         Settings.System.VOLTE_VOWIFI_OVERRIDE,
         Settings.System.OMNIJAWS_WEATHER_ICON_PACK,
+        Settings.System.OMNI_LOCKSCREEN_WEATHER_ENABLED,
     };
 }
