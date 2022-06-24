@@ -204,7 +204,6 @@ import com.android.systemui.statusbar.policy.KeyguardUserSwitcherController;
 import com.android.systemui.statusbar.policy.KeyguardUserSwitcherView;
 import com.android.systemui.statusbar.policy.OnHeadsUpChangedListener;
 import com.android.systemui.unfold.SysUIUnfoldComponent;
-import com.android.systemui.statusbar.policy.PulseController;
 import com.android.systemui.util.Utils;
 import com.android.systemui.util.settings.SecureSettings;
 import com.android.systemui.wallet.controller.QuickAccessWalletController;
@@ -3057,7 +3056,7 @@ public class NotificationPanelViewController extends PanelViewController {
         return (int) totalHeight;
     }
 
-    public void updateNotificationTranslucency() {
+    private void updateNotificationTranslucency() {
         float alpha = 1f;
         boolean showIconsLockScreen = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
                 Settings.System.AMBIENT_ICONS_LOCKSCREEN,
@@ -3075,10 +3074,6 @@ public class NotificationPanelViewController extends PanelViewController {
             alpha = 0;
         }
         mNotificationStackScrollLayoutController.setAlpha(alpha);
-        if (mBarState != StatusBarState.KEYGUARD && !isFullyCollapsed() || !isPanelVisibleBecauseOfHeadsUp()) {
-            mStatusBar.updateDismissAllVisibility(true);
-        }
-        mStatusBar.getPulseController().setQSShowing(mBarState != StatusBarState.KEYGUARD && !isFullyCollapsed());
     }
 
     private float getFadeoutAlpha() {
