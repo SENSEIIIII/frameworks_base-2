@@ -4,7 +4,6 @@ import static org.derpfest.systemui.Dependency.*;
 import static com.android.systemui.Dependency.ALLOW_NOTIFICATION_LONG_PRESS_NAME;
 import static com.android.systemui.Dependency.LEAK_REPORT_EMAIL_NAME;
 
-import android.app.AlarmManager;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -25,11 +24,9 @@ import androidx.annotation.Nullable;
 import org.derpfest.systemui.theme.ThemeOverlayControllerDerpFest;
 import org.derpfest.systemui.DerpFestServices;
 import com.syberia.android.systemui.assist.AssistManagerGoogle;
-import org.derpfest.systemui.smartspace.KeyguardSmartspaceController;
 
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.app.AssistUtils;
-import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardViewController;
 import com.android.systemui.assist.AssistLogger;
 import com.android.systemui.assist.AssistManager;
@@ -51,7 +48,7 @@ import com.android.systemui.model.SysUiState;
 import com.android.systemui.navigationbar.NavigationBarController;
 import com.android.systemui.navigationbar.NavigationModeController;
 import com.android.systemui.plugins.ActivityStarter;
-import com.android.systemui.plugins.BcSmartspaceDataPlugin;
+import com.android.systemui.media.dagger.MediaModule;
 import com.android.systemui.plugins.qs.QSFactory;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.power.EnhancedEstimates;
@@ -69,7 +66,6 @@ import com.android.systemui.settings.UserContentResolverProvider;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
 import com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl;
-import com.android.systemui.statusbar.NotificationMediaManager;
 import com.android.systemui.statusbar.NotificationShadeWindowController;
 import com.android.systemui.statusbar.notification.NotificationEntryManager;
 import com.android.systemui.statusbar.notification.collection.render.GroupMembershipManager;
@@ -135,10 +131,6 @@ import com.google.android.systemui.assist.uihints.input.TouchActionRegion;
 import com.google.android.systemui.assist.uihints.input.TouchInsideRegion;
 import com.google.android.systemui.columbus.ColumbusServiceWrapper;
 import com.google.android.systemui.elmyra.ServiceConfigurationGoogle;
-import com.google.android.systemui.smartspace.BcSmartspaceDataProvider;
-import com.google.android.systemui.smartspace.KeyguardMediaViewController;
-import com.google.android.systemui.smartspace.KeyguardZenAlarmViewController;
-import com.google.android.systemui.smartspace.SmartSpaceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -151,13 +143,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
+import javax.inject.Named;
+
 import dagger.Binds;
 import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.ElementsIntoSet;
-
-import javax.inject.Named;
 
 @Module(includes = {
         MediaModule.class,
@@ -293,45 +285,6 @@ public abstract class SystemUIDerpFestModule {
     @SysUISingleton
     static DerpFestServices provideDerpFestServices(Context context, UiEventLogger uiEventLogger, Lazy<ServiceConfigurationGoogle> lazy, Lazy<ColumbusServiceWrapper> lazyB) {
         return new DerpFestServices(context, uiEventLogger, lazy, lazyB);
-    }
-
-    // Google
-    @Provides
-    @SysUISingleton
-    static SmartSpaceController provideSmartSpaceController(Context context, KeyguardUpdateMonitor updateMonitor,
-            Handler handler, AlarmManager am, DumpManager dm) {
-        return new SmartSpaceController(context, updateMonitor, handler, am, dm);
-    }
-
-    @Provides
-    @SysUISingleton
-    static KeyguardSmartspaceController provideKeyguardSmartspaceController(Context context, FeatureFlags featureFlags,
-            KeyguardZenAlarmViewController keyguardZenAlarmViewController,
-            KeyguardMediaViewController keyguardMediaViewController) {
-        return new KeyguardSmartspaceController(context, featureFlags, keyguardZenAlarmViewController,
-                keyguardMediaViewController);
-    }
-
-    @Provides
-    @SysUISingleton
-    static KeyguardZenAlarmViewController provideKeyguardZenAlarmViewController(Context context,
-            BcSmartspaceDataPlugin bcSmartspaceDataPlugin, ZenModeController zenModeController,
-            AlarmManager alarmManager, NextAlarmController nextAlarmController, Handler handler) {
-        return new KeyguardZenAlarmViewController(context, bcSmartspaceDataPlugin, zenModeController, alarmManager,
-                nextAlarmController, handler);
-    }
-
-    @Provides
-    @SysUISingleton
-    static KeyguardMediaViewController provideKeyguardMediaViewController(Context context, BcSmartspaceDataPlugin bcSmartspaceDataPlugin,
-            @Main DelayableExecutor delayableExecutor, NotificationMediaManager notificationMediaManager, BroadcastDispatcher broadcastDispatcher) {
-        return new KeyguardMediaViewController(context, bcSmartspaceDataPlugin, delayableExecutor, notificationMediaManager, broadcastDispatcher);
-    }
-
-    @Provides
-    @SysUISingleton
-    static BcSmartspaceDataPlugin provideBcSmartspaceDataPlugin() {
-        return new BcSmartspaceDataProvider();
     }
 
     // AssistManagerGoogle
