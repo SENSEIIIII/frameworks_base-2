@@ -6362,11 +6362,6 @@ public final class Settings {
          */
         public static final String AUTO_BRIGHTNESS_ONE_SHOT = "auto_brightness_one_shot";
 
-        /**
-         * Show app volume rows in volume panel
-         * @hide
-         */
-        public static final String SHOW_APP_VOLUME = "show_app_volume";
 
         /**
           * Volume keys control cursor in text fields (default is 0)
@@ -6759,7 +6754,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(HEADS_UP_TIMEOUT);
             PRIVATE_SETTINGS.add(HEADS_UP_BLACKLIST_VALUES);
             PRIVATE_SETTINGS.add(FORCE_FULLSCREEN_CUTOUT_APPS);
-            PRIVATE_SETTINGS.add(SHOW_APP_VOLUME);
+//            PRIVATE_SETTINGS.add(SHOW_APP_VOLUME);
             PRIVATE_SETTINGS.add(SENSOR_BLOCK);
             PRIVATE_SETTINGS.add(LOCK_HIDE_STATUS_BAR);
             PRIVATE_SETTINGS.add(BATTERY_LEVEL_COLORS);
@@ -6823,6 +6818,12 @@ public final class Settings {
             INSTANT_APP_SETTINGS.add(SOUND_EFFECTS_ENABLED);
             INSTANT_APP_SETTINGS.add(ACCELEROMETER_ROTATION);
         }
+
+        /**
+         * Show app volume rows in volume panel
+         * @hide
+         */
+        public static final String SHOW_APP_VOLUME = "show_app_volume";
 
         /**
          * When to use Wi-Fi calling

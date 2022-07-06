@@ -21,4 +21,6 @@
         <attr name="viewLocation" format="integer" />
     </declare-styleable>
 
+    <color name="volume_row_bg">@android:color/system_accent2_200</color>
+
 </resources>

@@ -3009,7 +3009,13 @@ static const JNINativeMethod gMethods[] =
          {"canBeSpatialized",
           "(Landroid/media/AudioAttributes;Landroid/media/AudioFormat;"
           "[Landroid/media/AudioDeviceAttributes;)Z",
-          (void *)android_media_AudioSystem_canBeSpatialized}};
+          (void *)android_media_AudioSystem_canBeSpatialized},
+         {"setAppVolume", "(Ljava/lang/String;F)I",
+          (void *)android_media_AudioSystem_setAppVolume},
+         {"setAppMute", "(Ljava/lang/String;Z)I",
+          (void *)android_media_AudioSystem_setAppMute},
+         {"listAppVolumes", "(Ljava/util/ArrayList;)I",
+          (void *)android_media_AudioSystem_listAppVolumes}};
 
 
 static const JNINativeMethod gEventHandlerMethods[] = {
